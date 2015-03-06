@@ -79,6 +79,10 @@ AppKit uses the following projects:
 
 AppKit pulls in the following packages:
 
+##### From [Taylor Otwell](https://github.com/taylorotwell)
+
+* [Illuminate HTML](https://github.com/illuminate/html)
+
 ##### From [Francois Zaninotto](https://github.com/fzaninotto)
 
 * [Faker](https://github.com/fzaninotto/Faker)
