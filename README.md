@@ -1,7 +1,7 @@
 Cloud5 Idea Studio Laravel 5 AppKit
 ===================
 [![Laravel](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
-[![Release](https://img.shields.io/badge/release-beta-orange.svg?style=flat-square)
+![Release](https://img.shields.io/badge/release-beta-orange.svg?style=flat-square)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
 <div style="color: #a94442;background-color: #f2dede;padding: 15px;margin-bottom: 20px;border: 1px solid #ebccd1;border-radius: 4px;">
