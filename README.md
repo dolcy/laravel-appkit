@@ -1,7 +1,17 @@
 Cloud5 Idea Studio Laravel 5 AppKit
 ===================
 [![Laravel](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
+[![Release](https://img.shields.io/badge/release-beta-orange.svg)]
+[![Laravel](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
+
+<div style="color: #a94442; background-color: #f2dede; 
+padding: 15px;
+margin-bottom: 20px;
+border: 1px solid #ebccd1;
+border-radius: 4px;">
+    Not recommended for use just yet.
+</div>
 
 AppKit provides tools and utilities for building modular Laravel 5 applications.
 
@@ -41,15 +51,36 @@ Once this operation is complete, simply add the service provider to your project
 
 #### Initialize
 Now run the following **Artisan** command to initialize AppKit.
+The first argument is your application's name.
+The second argument is to specify whether you want to use AppKit's `less` or `sass` assets.
 ```
 php artisan appkit:init [name_of_application] [less|sass]
 ```
 
 #### Install
-Before you run your new application, run the following **artisan** command:
+Before you run your new application, run the following **Artisan** command:
 ```
 php artisan appkit:install
 ```
 This command will run all application and module migrations, seed the database and create a super user. This command will also ask if you would like to serve (`php artisan serve`) the application. Type yes if you'd like to, otherwise type no.
 
 That's it! Now you you can expand your application and build something amazing.
+
+#### Credits
+AppKit uses the following projects:
+
+##### From [Laracasts](https://github.com/laracasts)
+* [Flash](https://github.com/laracasts/flash)
+* [PHP Vars to JavaScript](https://github.com/laracasts/PHP-Vars-To-Js-Transformer)
+ 
+##### From [Caffeinated](https://github.com/caffeinated)
+* [Modules](https://github.com/caffeinated/modules)
+* [Shinobi](https://github.com/caffeinated/shinobi)
+
+* ##### From [Nicolás López](https://github.com/nicolaslopezj)
+* [Shearchable](https://github.com/nicolaslopezj/searchable)
+
+AppKit pulls in the following packages:
+
+* ##### From [Francois Zaninotto](https://github.com/fzaninotto)
+* [Faker](https://github.com/fzaninotto/Faker)
