@@ -4,9 +4,8 @@ Cloud5 Idea Studio Laravel 5 AppKit
 ![Release](https://img.shields.io/badge/release-beta-orange.svg?style=flat-square)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
 
-<div style="color: #a94442;background-color: #f2dede;padding: 15px;margin-bottom: 20px;border: 1px solid #ebccd1;border-radius: 4px;">
-    Not recommended for use just yet.
-</div>
+
+###### *Not recommended for use just yet.*
 
 AppKit provides tools and utilities for building modular Laravel 5 applications.
 
@@ -65,17 +64,21 @@ That's it! Now you you can expand your application and build something amazing.
 AppKit uses the following projects:
 
 ##### From [Laracasts](https://github.com/laracasts)
+
 * [Flash](https://github.com/laracasts/flash)
 * [PHP Vars to JavaScript](https://github.com/laracasts/PHP-Vars-To-Js-Transformer)
  
 ##### From [Caffeinated](https://github.com/caffeinated)
+
 * [Modules](https://github.com/caffeinated/modules)
 * [Shinobi](https://github.com/caffeinated/shinobi)
 
-* ##### From [Nicolás López](https://github.com/nicolaslopezj)
+##### From [Nicolás López](https://github.com/nicolaslopezj)
+
 * [Shearchable](https://github.com/nicolaslopezj/searchable)
 
 AppKit pulls in the following packages:
 
-* ##### From [Francois Zaninotto](https://github.com/fzaninotto)
+##### From [Francois Zaninotto](https://github.com/fzaninotto)
+
 * [Faker](https://github.com/fzaninotto/Faker)
