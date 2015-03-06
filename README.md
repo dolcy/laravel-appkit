@@ -48,8 +48,12 @@ Now run the following **Artisan** command to initialize AppKit.
 The first argument is your application's name.
 The second argument is to specify whether you want to use AppKit's `less` or `sass` assets.
 ```
-php artisan appkit:init [name_of_application] [less|sass]
+php artisan appkit:init [name] [assets]
 ```
+
+Replace `[name]` with the name of your application - **Required**
+
+Replace `[assets]` with either `less` if you'd like to use the less assets or `sass` if you'd like to use the sass assets - **Required**
 
 #### Install
 Before you run your new application, run the following **Artisan** command:
