@@ -45,8 +45,7 @@ Once this operation is complete, simply add the service provider to your project
 
 #### Initialize
 Now run the following **Artisan** command to initialize AppKit.
-The first argument is your application's name.
-The second argument is to specify whether you want to use AppKit's `less` or `sass` assets.
+
 ```
 php artisan appkit:init [name] [assets]
 ```
