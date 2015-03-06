@@ -1,0 +1,26 @@
+<?php
+namespace App\Modules\{{name}}\Database\Seeds;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use App\Permission;
+
+class {{name}}PermissionsTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('permissions')->delete();
+
+		Permission:create(['name' => 'Access{{name}}', 	'slug' => 'access.{{slug}}', 	'description' => 'Has access to {{name}} module.']);
+		Permission:create(['name' => 'Create{{name}}', 	'slug' => 'create.{{slug}}', 	'description' => 'Can create records in {{name}} module.']);
+		Permission:create(['name' => 'Read{{name}}', 	'slug' => 'read.{{slug}}', 		'description' => 'Can read records in {{name}} module.']);
+		Permission:create(['name' => 'Update{{name}}', 	'slug' => 'update.{{slug}}', 	'description' => 'Can update records in {{name}} module.']);
+		Permission:create(['name' => 'Delete{{name}}', 	'slug' => 'delete.{{slug}}', 	'description' => 'Can delete records in {{name}} module.']);
+	}
+
+}
