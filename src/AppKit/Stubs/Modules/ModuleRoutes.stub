@@ -10,6 +10,7 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::group(['prefix' => '{{slug}}', 'middleware' => 'access', 'permissions' => ['access.{{slug}}']], function() {
-	Route::get('/', ['as' => '{{slug}}.index', 'uses' => '{{name}}Controller@getIndex']);
+Route::group(['middleware' => 'access', 'permissions' => ['access.{{slug}}']], function()
+{
+	Route::resource('{{slug}}', '{{slug}}Controller');
 });

@@ -26,7 +26,7 @@ class NavigationComposer {
      */
     public function __construct()
     {
-        $this->generateNavigation();
+        $this->generateNavigation(); 
     }
 
     /**
@@ -54,6 +54,8 @@ class NavigationComposer {
 								if( $user->is($module['requiredAccess']) || $user->can($module['requiredAccess']) ) {
 									// User has access to this module - Is in role or has permission
 									$item = $menu->add($module['menuText'], ['icon' => $module['icon']]);
+									$key = key($module['redirect']);
+									$item->add($module['menuText'], ['icon' => $module['icon'], $key => $module['redirect'][$key]]);
 									if( isset($module['navigation']) && count($module['navigation']) > 0 ) {
 										foreach ($module['navigation'] as $subitem) {
 											if ( $subitem['requiresAccess']) {
@@ -80,6 +82,8 @@ class NavigationComposer {
 							} else {
 								// User does not require access to this module
 								$item = $menu->add($module['menuText'], ['icon' => $module['icon']]);
+								$key = key($module['redirect']);
+								$item->add($module['menuText'], ['icon' => $module['icon'], $key => $module['redirect'][$key]]);
 								if( isset($module['navigation']) && count($module['navigation']) > 0 ) {
 									foreach ($module['navigation'] as $subitem) {
 										if ( $subitem['requiresAccess']) {
