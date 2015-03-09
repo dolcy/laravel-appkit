@@ -45,7 +45,7 @@ class InitCommand extends Command
 	 */
 	public function fire()
 	{
-		return $this->handler->fire($this, $this, $this->argument('name'), $this, $this->argument('assets'));
+		return $this->handler->fire($this, $this->argument('name'), $this->argument('assets'));
 	}
 
 	/**
