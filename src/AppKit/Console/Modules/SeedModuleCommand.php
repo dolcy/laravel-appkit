@@ -86,7 +86,7 @@ class SeedModuleCommand extends Command
 		$rootSeeder = $moduleName.'DatabaseSeeder';
 		$fullPath   = $namespace.$moduleName.'\Database\Seeds\\'.$rootSeeder;
 
-		if (\File::exists($fullPath)) {
+		if (\File::exists(base_path($fullPath.'.php'))) {
 			if ($this->option('class')) {
 				$params['--class'] = $this->option('class');
 			} else {
