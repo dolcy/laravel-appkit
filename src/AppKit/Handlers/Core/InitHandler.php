@@ -107,7 +107,7 @@ class InitHandler
 		exec('composer dump-autoload');
 		exec('gulp');
 
-		$console->info('AppKit [ '.$name.' ] has been initialized.');
+		$console->info('AppKit [ '.$this->name.' ] has been initialized.');
 
 		return true;
 	}
