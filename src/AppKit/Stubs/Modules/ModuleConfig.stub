@@ -10,10 +10,10 @@
 	"navigation": [
 		{
 			"requiresAccess": true, 
-			"requiredAccess": "{{slug}}.permission", 
+			"requiredAccess": "permission.{{slug}}", 
 			"menuText": "Menu Text",  
 			"icon": "icon", 
-			"redirect": {"url": "{{slug}}/page"}
+			"redirect": {"route": "{{slug}}.index"}
 		}
 	],
 	"menuText": "Menu Text",
