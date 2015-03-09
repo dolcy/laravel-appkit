@@ -33,7 +33,7 @@ Before you start, if you haven't already, run the `npm install` command in your 
 Once NPM has completed, install the package through Composer. The best way to do this is through your terminal via Composer itself:
 
 ```
-composer require cloud5ideas/appkit
+composer require cloud5ideas/appkit:dev-master
 ```
 
 Once this operation is complete, simply add the service provider to your project's `config/app.php` file:
