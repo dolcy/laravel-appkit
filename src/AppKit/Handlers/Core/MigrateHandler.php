@@ -65,9 +65,7 @@ class MigrateHandler
 	 */
 	protected function runMigrations($options)
 	{
-		$this->console->info('=====APPLICATION=====');
 		$this->console->call('migrate', $options);
-		$this->console->info('=====MODULES=====');
 		$this->console->callsilent('appkit:migrate:module', $options);
 	}
 
@@ -78,9 +76,7 @@ class MigrateHandler
 	 */
 	protected function runRefreshMigrations($options)
 	{
-		$this->console->info('=====APPLICATION=====');
 		$this->console->call('migrate:refresh', $options);
-		$this->console->info('=====MODULES=====');
 		$this->console->callsilent('appkit:migrate:refresh:module', $options);
 	}
 
@@ -91,9 +87,7 @@ class MigrateHandler
 	 */
 	protected function runResetMigrations($options)
 	{
-		$this->console->info('=====APPLICATION=====');
 		$this->console->call('migrate:reset', $options);
-		$this->console->info('=====MODULES=====');
 		$this->console->callsilent('appkit:migrate:reset:module', $options);
 	}
 
@@ -104,9 +98,7 @@ class MigrateHandler
 	 */
 	protected function runRollbackMigrations($options)
 	{
-		$this->console->info('=====APPLICATION=====');
 		$this->console->call('migrate:rollback', $options);
-		$this->console->info('=====MODULES=====');
 		$this->console->callsilent('appkit:migrate:rollback:module', $options);
 	}
 
