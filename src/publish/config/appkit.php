@@ -114,8 +114,8 @@ return [
 	| Permission Denied Message
 	|--------------------------------------------------------------------------
 	|
-	| The message that the 'user_can()' helper function will flash to the session should a user
-	| not have the required permission to perform an action.
+	| The message that the 'user_can()' & 'user_is()' helper functions will flash to the session should a user
+	| not have the required permission or role to perform an action.
 	|
 	*/
 

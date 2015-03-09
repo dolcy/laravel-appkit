@@ -37,15 +37,16 @@ class InstallHandler
 	{
 		$this->console = $console;
 
-		$this->console->info('AppKit will now reset and re-run all migrations and seeders.');
+		$this->console->info('AppKit will now run all migrations and seeders.');
 
 		if ($this->console->confirm('Would you like to continue? [yes|no]'))
 		{
-			$this->console->call('appkit:migrate:refresh');
+			$this->console->call('appkit:migrate');
 			$this->console->call('appkit:seed');
 
 			$this->createUser();
 			$this->optimize($optimize);
+			$this->serve($optimize);
 		}
 	}
 
@@ -62,6 +63,18 @@ class InstallHandler
 			{
 				$this->console->call('optimize');
 			}
+		}
+	}
+
+	/**
+	 * Serve Application.
+	 *
+	 * @return void
+	 */
+	protected function serve() {
+		if ($this->console->confirm('Would you like to serve your application? [yes|no]'))
+		{
+			$this->console->call('serve');
 		}
 	}
 

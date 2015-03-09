@@ -107,7 +107,7 @@ class InitHandler
 		exec('composer dump-autoload');
 		exec('gulp');
 
-		$console->info('AppKit [ '.$appName.' ] has been initialized.');
+		$console->info('AppKit [ '.$name.' ] has been initialized.');
 
 		return true;
 	}
@@ -161,7 +161,7 @@ class InitHandler
 		$content = $this->finder->get(__DIR__.'/../../../publish/config/appkit.php');
 		$content = str_replace(
 			'{{name}}',
-			$appName,
+			studly_case($appName),
 			$content
 		);
 		$this->finder->put(base_path('config/appkit.php'), $content);

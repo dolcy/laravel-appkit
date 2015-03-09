@@ -106,7 +106,7 @@ class AppKitServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return ['modules', 'menus', 'flash', 'widgets'];
+		return ['modules', 'menus', 'flash', 'widgets', 'form', 'html'];
 	}
 
 	/**
@@ -117,6 +117,14 @@ class AppKitServiceProvider extends ServiceProvider
 	protected function registerAliases() {
 
 		$aliases = AliasLoader::getInstance();
+		$aliases->alias(
+            'Form',
+            'Illuminate\Html\FormFacade'
+        );
+        $aliases->alias(
+            'Html',
+            'Illuminate\Html\HtmlFacade'
+        );
 		$aliases->alias(
             'Modules',
             'C5\AppKit\Facades\ModulesFacade'
@@ -146,6 +154,9 @@ class AppKitServiceProvider extends ServiceProvider
 	 */
 	protected function registerServices()
 	{
+
+		$this->app->register('Illuminate\Html\HtmlServiceprovider');
+
 		$this->app->bindShared('modules', function ($app) {
 			return new Modules($app['config'], $app['files']);
 		});

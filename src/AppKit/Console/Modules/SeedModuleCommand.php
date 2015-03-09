@@ -30,6 +30,12 @@ class SeedModuleCommand extends Command
 	protected $module;
 
 	/**
+	 * @var \Illuminate\Filesystem\Filesystem
+	 */
+	protected $finder;
+
+
+	/**
 	 * Create a new command instance.
 	 *
 	 * @param \C5\AppKit\Modules\Modules $module
@@ -80,17 +86,19 @@ class SeedModuleCommand extends Command
 		$rootSeeder = $moduleName.'DatabaseSeeder';
 		$fullPath   = $namespace.$moduleName.'\Database\Seeds\\'.$rootSeeder;
 
-		if ($this->option('class')) {
-			$params['--class'] = $this->option('class');
-		} else {
-			$params['--class'] = $fullPath;
-		}
+		if (\File::exists($fullPath)) {
+			if ($this->option('class')) {
+				$params['--class'] = $this->option('class');
+			} else {
+				$params['--class'] = $fullPath;
+			}
 
-		if ($option = $this->option('database')) {
-			$params['--database'] = $option;
-		}
+			if ($option = $this->option('database')) {
+				$params['--database'] = $option;
+			}
 
-		$this->call('db:seed', $params);
+			$this->call('db:seed', $params);
+		}
 	}
 
 	/**
