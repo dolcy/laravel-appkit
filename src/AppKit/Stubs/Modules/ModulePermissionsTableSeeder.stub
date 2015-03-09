@@ -14,8 +14,6 @@ class {{name}}PermissionsTableSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		DB::table('permissions')->delete();
-
 		Permission:create(['name' => 'Access{{name}}', 	'slug' => 'access.{{slug}}', 	'description' => 'Has access to {{name}} module.']);
 		Permission:create(['name' => 'Create{{name}}', 	'slug' => 'create.{{slug}}', 	'description' => 'Can create records in {{name}} module.']);
 		Permission:create(['name' => 'Read{{name}}', 	'slug' => 'read.{{slug}}', 		'description' => 'Can read records in {{name}} module.']);
