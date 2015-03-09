@@ -17,7 +17,7 @@
         "illuminate/config": "~5.0",
         "illuminate/routing": "~5.0",
         "illuminate/html": "~5.0",
-        "fzaninotto/faker": "~1.5"
+        "fzaninotto/faker": "~1.4"
     },
     "autoload": {
         "psr-4": {
