@@ -2,6 +2,7 @@
 
 use Flash;
 use Auth;
+use Mail;
 use App\User;
 use App\Role;
 use App\Permission;
@@ -153,7 +154,7 @@ class UsersController extends Controller {
 	 */
 	public function password(User $user, UpdatePasswordRequest $request)
 	{
-		$user->password($request->input('password'));
+		$user->setPassword($request->input('password'));
 		flash()->success('User password successfully updated.');
 		return redirect()->route('users.edit', $user->id);
 	}

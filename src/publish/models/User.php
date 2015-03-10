@@ -76,14 +76,38 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->attributes['password'] = bcrypt($value);
     }
 
+    /**
+	 * Make sure the key field is set if it is null
+	 *
+	 * @param string $value
+	 **/
+    public function getKeyAttribute($value)
+    {
+        if(is_null($value))
+            return $this->setKey();
+
+        return $value;
+    }
+
 	/**
 	 * Update user password
 	 *
 	 * @param string $password
 	 **/
-	public function password($password) {
+	public function setPassword($password) {
 		$this->password = bcrypt($password);
 		$this->save();
+	}
+
+	/**
+	 * Update user key
+	 *
+	 **/
+	public function setKey() {
+		$key = str_random(32);
+		$this->key = $key;
+		$this->save();
+		return $key;
 	}
 
 }
