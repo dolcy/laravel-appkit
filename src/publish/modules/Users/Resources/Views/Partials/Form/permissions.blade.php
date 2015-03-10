@@ -5,7 +5,7 @@
 @if ($is_superuser)
 	<div class="checkbox">
 		<label>
-			{!! Form::checkbox('superuser', 1) !!} Superuser
+			{!! Form::checkbox('is_superuser', 1) !!} Superuser
 		</label>
 	</div>
 @endif
