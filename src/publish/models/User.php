@@ -66,6 +66,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->attributes['email'] = strtolower($value);
     }
 
+    /**
+	 * Make sure the password field is hashed
+	 *
+	 * @param string $value
+	 **/
+	public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 	/**
 	 * Update user password
 	 *

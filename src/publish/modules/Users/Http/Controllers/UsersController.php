@@ -73,9 +73,17 @@ class UsersController extends Controller {
 	public function store(CreateUserRequest $request)
 	{
 		if (!user_can('create.users', true)) return redirect()->back()->withInput();
+		$input = $request->all();
+		$user = User::create($input);
+		$user->syncRoles($input['roles']);
+		Mail::send('users::emails.welcome', $input, function($message) use ($input)
+		{
+		    $message->from(Auth::user()->email, Auth::user()->first_name.' '.Auth::user()->last_name);
 
-		$user = User::create($request->all());
-		$user->syncRoles($request->input('roles'));
+		    $message->to($input['email']);
+
+		    $message->subject('Welcome to '.config('appkit.app_name'));
+		});
 		return redirect()->route('users.index');
 	}
 
