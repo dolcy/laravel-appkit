@@ -81,28 +81,5 @@ To log any bugs, provide suggestions or enhancements etc. please follow [this gu
 ---
 
 #### Credits
-AppKit contains the following projects:
 
-##### From [Laracasts](https://github.com/laracasts)
-
-* [Flash](https://github.com/laracasts/flash)
-* [PHP Vars to JavaScript](https://github.com/laracasts/PHP-Vars-To-Js-Transformer)
- 
-##### From [Caffeinated](https://github.com/caffeinated)
-
-* [Modules](https://github.com/caffeinated/modules)
-* [Shinobi](https://github.com/caffeinated/shinobi)
-
-##### From [Nicolás López](https://github.com/nicolaslopezj)
-
-* [Shearchable](https://github.com/nicolaslopezj/searchable)
-
-AppKit pulls in the following packages:
-
-##### From [Taylor Otwell](https://github.com/taylorotwell)
-
-* [Illuminate HTML](https://github.com/illuminate/html)
-
-##### From [Francois Zaninotto](https://github.com/fzaninotto)
-
-* [Faker](https://github.com/fzaninotto/Faker)
+AppKit is made up of a few projects, and I have [these people](https://github.com/Cloud5Ideas/appkit/wiki/Some-Love) to thanks for their hard work and making their projects available to us.
