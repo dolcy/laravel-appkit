@@ -1,7 +1,5 @@
 ## Cloud5 Idea Studio : Laravel 5 AppKit
 
----
-
 [![Laravel](https://img.shields.io/badge/Laravel-5.0-orange.svg?style=flat-square)](http://laravel.com)
 ![Release](https://img.shields.io/badge/release-beta-orange.svg?style=flat-square)
 ![Stability](https://img.shields.io/badge/stability-stable-green.svg?style=flat-square)
@@ -63,8 +61,6 @@ Replace `[assets]` with either `less` if you'd like to use the less assets or `s
 
 That's it! Now you you can expand your application and build something amazing.
 
----
-
 #### Install
 Before you run or serve your new application, run the following **Artisan** command:
 ```
@@ -76,11 +72,11 @@ This command will run all application and module migrations, seed the database a
 
 #### Contributing
 
-If you would like to contribute to AppKit, this is [how to](https://github.com/Cloud5Ideas/appkit/wiki/Contributing)
+If you would like to contribute to AppKit, this is [how to](https://github.com/Cloud5Ideas/appkit/wiki/Contributing).
 
 #### Issues, Suggestions, Enhancements...
 
-[What to do](https://github.com/Cloud5Ideas/appkit/wiki/Issues)
+To log any bugs, provide suggestions or enhancements etc. please follow [this guide](https://github.com/Cloud5Ideas/appkit/wiki/Issues).
 
 ---
 
