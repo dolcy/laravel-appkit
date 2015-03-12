@@ -82,4 +82,4 @@ To log any bugs, provide suggestions or enhancements etc. please follow [this gu
 
 #### Credits
 
-AppKit is made up of a few projects, and I have [these people](https://github.com/Cloud5Ideas/appkit/wiki/Some-Love) to thanks for their hard work and making their projects available to us.
+AppKit is made up of a few projects, and I have [these people](https://github.com/Cloud5Ideas/appkit/wiki/Some-Love) to thank for their hard work and making their projects available to us.
