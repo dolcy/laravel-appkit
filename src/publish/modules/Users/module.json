@@ -12,7 +12,7 @@
 		{"requiresAccess": true, "requiredAccess": "create.users", "menuText": "Create User",  "icon": "", "redirect": {"route": "users.create"}}
 	],
 	"menuText": "Users",
-	"icon": "fa fa-user",
+	"icon": "user",
 	"redirect": {"url": "users"},
 	"order": 1
 }

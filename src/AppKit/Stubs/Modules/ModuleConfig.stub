@@ -11,13 +11,13 @@
 		{
 			"requiresAccess": true, 
 			"requiredAccess": "permission.{{slug}}", 
-			"menuText": "Menu Text",  
-			"icon": "icon", 
-			"redirect": {"route": "{{slug}}.index"}
+			"menuText": "Create {{singular}}",  
+			"icon": "", 
+			"redirect": {"route": "{{slug}}.create"}
 		}
 	],
 	"menuText": "Menu Text",
-	"icon": "icon",
+	"icon": "puzzle-piece",
 	"redirect": {"url": "{{slug}}"},
 	"order": 0
 }

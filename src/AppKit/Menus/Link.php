@@ -1,12 +1,7 @@
-<?php namespace C5\AppKit\Menus;
+<?php
+namespace C5\AppKit\Menus;
 
-/**
- * License: MIT
- * Copyright (c) 2015 Shea Lewis
- * Github: https://github.com/caffeinated
- * @package caffeinated/menus
- */
-class MenuLink
+class Link
 {
 	/**
 	 * @var array
@@ -37,7 +32,7 @@ class MenuLink
 	 * Set the link's href property.
 	 *
 	 * @param  string  $href
-	 * @return \C5\AppKit\Menus\MenuLink
+	 * @return \C5\AppKit\Menus\Link
 	 */
 	public function href($href)
 	{
@@ -50,7 +45,7 @@ class MenuLink
 	 * Add attributes to the link.
 	 *
 	 * @param  mixed
-	 * @return \C5\AppKit\Menus\MenuLink|string
+	 * @return \C5\AppKit\Menus\Link|string
 	 */
 	public function attr()
 	{

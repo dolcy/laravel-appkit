@@ -1,9 +1,0 @@
-[
-	{
-		"requiresAccess": true, 
-		"requiredAccess": "{{slug}}.permission", 
-		"view": "{{slug}}::sidebar.{{lower}}", 
-		"composer": "{{escaped_namespace}}{{module}}\\Composers\\Sidebar\\{{name}}SidebarWidgetComposer", 
-		"enabled": true
-	}
-]

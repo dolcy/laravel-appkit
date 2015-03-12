@@ -4,7 +4,7 @@ use App;
 use Config;
 use Lang;
 use Modules;
-use Menus;
+use Menu;
 use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\ServiceProvider;
@@ -45,65 +45,25 @@ class NavigationComposer {
 	 *
 	 **/
     protected function generateNavigation() {
-    	$this->menu = Menus::make('menu_admin_left', function($menu) {
+    	$this->menu = Menu::makeAndReturn('menu_admin_left', function($menu) {
+
 						$user = Auth::user();
 						$modules = Modules::navigable();
+
 						foreach ($modules as $module) {
-							if ( $module['requiresAccess']) {
-								// User requires access to this module
-								if( $user->is($module['requiredAccess']) || $user->can($module['requiredAccess']) ) {
-									// User has access to this module - Is in role or has permission
-									$item = $menu->add($module['menuText'], ['icon' => $module['icon']]);
-									$key = key($module['redirect']);
-									$item->add($module['menuText'], ['icon' => $module['icon'], $key => $module['redirect'][$key]]);
-									if( isset($module['navigation']) && count($module['navigation']) > 0 ) {
-										foreach ($module['navigation'] as $subitem) {
-											if ( $subitem['requiresAccess']) {
-												// User requires access to this menu item
-												if ( $user->is($subitem['requiredAccess']) || $user->can($subitem['requiredAccess'])) {
-													// User has access to this menu item - Is in role or has permission
-													$key = key($subitem['redirect']);
-													$item->add($subitem['menuText'], ['icon' => $subitem['icon'], $key => $subitem['redirect'][$key]]);
-												}
-											} else {
-												$key = key($subitem['redirect']);
-												$item->add($subitem['menuText'], ['icon' => $subitem['icon'], $key => $subitem['redirect'][$key]]);
-											}
-										}
-									} else {
-										if( isset($module['redirect']) ) {
-											$key = key($module['redirect']);
-											$item->configureLink([$key => $module['redirect'][$key]]);
-										} else {
-											$item->configureLink(['url' => $module['slug']]);
-										}
-									}
-								}
-							} else {
-								// User does not require access to this module
-								$item = $menu->add($module['menuText'], ['icon' => $module['icon']]);
-								$key = key($module['redirect']);
-								$item->add($module['menuText'], ['icon' => $module['icon'], $key => $module['redirect'][$key]]);
-								if( isset($module['navigation']) && count($module['navigation']) > 0 ) {
-									foreach ($module['navigation'] as $subitem) {
-										if ( $subitem['requiresAccess']) {
-											// User requires access to this menu item
-											if ( $user->is($subitem['requiredAccess']) || $user->can($subitem['requiredAccess'])) {
-												// User has access to this menu item - Is in role or has permission
-												$key = key($subitem['redirect']);
-												$item->add($subitem['menuText'], ['icon' => $subitem['icon'], $key => $subitem['redirect'][$key]]);
-											}
-										} else {
-											$key = key($subitem['redirect']);
-											$item->add($subitem['menuText'], ['icon' => $subitem['icon'], $key => $subitem['redirect'][$key]]);
-										}
-									}
-								} else {
-									if( isset($module['redirect']) ) {
-										$key = key($module['redirect']);
-										$item->configureLink([$key => $module['redirect'][$key]]);
-									} else {
-										$item->configureLink(['url' => $module['slug']]);
+							$item = $menu->add($module['menuText'], $module['redirect'])
+									->icon($module['icon'])
+									->data('requiresAccess', $module['requiresAccess']);
+							if ($module['requiresAccess']) {
+								$item->data('access', $module['requiredAccess']);
+							}
+
+							if( isset($module['navigation']) && count($module['navigation']) > 0 ) {
+								foreach ($module['navigation'] as $subitem) {
+									$sub = $item->add($subitem['menuText'], $subitem['redirect'])
+											->data('requiresAccess', $subitem['requiresAccess']);
+									if ($subitem['requiresAccess']) {
+										$sub->data('access', $subitem['requiredAccess']);
 									}
 								}
 							}

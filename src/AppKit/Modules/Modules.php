@@ -117,6 +117,37 @@ class Modules implements Countable
 	}
 
 	/**
+	 * Get all module slugs.
+	 *
+	 * @return array
+	 */
+	protected function getAllSlugs()
+	{
+		$modules = $this->all();
+		$slugs   = array();
+
+		foreach ($modules as $module)
+		{
+			$slugs[] = $module['slug'];
+		}
+
+		return $slugs;
+	}
+
+	/**
+	 * Check if given module path exists.
+	 *
+	 * @param  string  $folder
+	 * @return bool
+	 */
+	protected function pathExists($folder)
+	{
+		$folder = Str::studly($folder);
+
+		return in_array($folder, $this->getAllBasenames());
+	}
+
+	/**
 	 * Check if given module exists.
 	 *
 	 * @param  string $slug
@@ -124,7 +155,9 @@ class Modules implements Countable
 	 */
 	public function exists($slug)
 	{
-		return in_array($slug, $this->getAllBasenames());
+		$slug = strtolower($slug);
+
+		return in_array($slug, $this->getAllSlugs());
 	}
 
 	/**
@@ -178,9 +211,9 @@ class Modules implements Countable
 	 */
 	public function getModulePath($slug, $allowNotExists = false)
 	{
-		$module = studly_case($slug);
+		$module = Str::studly($slug);
 
-		if ( ! $this->exists($module) and $allowNotExists === false)
+		if ( ! $this->pathExists($module) and $allowNotExists === false)
 			return null;
 
 		return $this->getPath()."/{$module}/";
@@ -414,7 +447,7 @@ class Modules implements Countable
 
 		$default = [];
 
-		if ( ! $this->exists($module))
+		if ( ! $this->pathExists($module))
 			return $default;
 
 		$path = $this->getJsonPath($module);

@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migrator;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 use Illuminate\Support\ServiceProvider;
 use C5\AppKit\Modules\Modules;
-use C5\AppKit\Menus\Menus;
+use C5\AppKit\Menus\Menu;
 use C5\AppKit\JavaScript\PHPToJavaScriptTransformer;
 use C5\AppKit\JavaScript\LaravelViewBinder;
 use C5\AppKit\Exceptions\JavaScriptException;
@@ -106,7 +106,7 @@ class AppKitServiceProvider extends ServiceProvider
 	 */
 	public function provides()
 	{
-		return ['modules', 'menus', 'flash', 'widgets', 'form', 'html'];
+		return ['modules', 'menu', 'flash', 'form', 'html'];
 	}
 
 	/**
@@ -130,16 +130,12 @@ class AppKitServiceProvider extends ServiceProvider
             'C5\AppKit\Facades\ModulesFacade'
         );
         $aliases->alias(
-            'Menus',
-            'C5\AppKit\Facades\MenusFacade'
+            'Menu',
+            'C5\AppKit\Facades\MenuFacade'
         );
         $aliases->alias(
             'Flash',
             'C5\AppKit\Facades\FlashFacade'
-        );
-        $aliases->alias(
-            'Widgets',
-            'C5\AppKit\Facades\WidgetsFacade'
         );
         $aliases->alias(
             'JavaScript',
@@ -161,8 +157,8 @@ class AppKitServiceProvider extends ServiceProvider
 			return new Modules($app['config'], $app['files']);
 		});
 
-		$this->app->bindShared('menus', function($app) {
-			return new Menus($app['config'], $app['html'], $app['url']);
+		$this->app->bindShared('menu', function($app) {
+			return new Menu($app['config'], $app['view'], $app['html'], $app['url']);
 		});
 
 		$this->app->bind(
@@ -172,10 +168,6 @@ class AppKitServiceProvider extends ServiceProvider
 
 		$this->app->bindShared('flash', function () {
             return $this->app->make('C5\AppKit\Flash\FlashNotifier');
-        });
-
-        $this->app->bindShared('widgets', function () {
-            return $this->app->make('C5\AppKit\Widgets\Widgets');
         });
 
 		$this->app->bind('JavaScript', function ($app) {
@@ -193,7 +185,6 @@ class AppKitServiceProvider extends ServiceProvider
 
 		$this->app->booting(function ($app) {
 			$app['modules']->register();
-			$app['widgets']->register();
 		});
 	}
 
@@ -252,7 +243,6 @@ class AppKitServiceProvider extends ServiceProvider
 		$this->registerMakeModuleMigrationCommand();
 		$this->registerMakeModuleRequestCommand();
 		$this->registerMakeModuleControllerCommand();
-		$this->registerMakeModuleWidgetCommands();
 		$this->registerMakeModuleSeederCommand();
 		$this->registerMakeModuleEmailCommand();
 		$this->registerMigrateModuleCommand();
@@ -278,8 +268,6 @@ class AppKitServiceProvider extends ServiceProvider
 			'appkit.make.module.migration',
 			'appkit.make.module.request',
 			'appkit.make.module.controller',
-			'appkit.make.module.dashboard',
-			'appkit.make.module.sidebar',
 			'appkit.make.module.seeder',
 			'appkit.make.module.email',
 			'appkit.migrate.module',
@@ -487,26 +475,6 @@ class AppKitServiceProvider extends ServiceProvider
 			$handler = new Handlers\Modules\MakeModuleControllerHandler($app['modules'], $app['files']);
 
 			return new Console\Modules\MakeModuleControllerCommand($handler);
-		});
-	}
-
-	/**
-	 * Register the "appkit:make:module:dashboard:widget" and "appkit:make:module:sidebar:widget" console commands.
-	 *
-	 * @return Console\Modules\ModuleMake*WidgetCommand
-	 */
-	protected function registerMakeModuleWidgetCommands()
-	{
-		$this->app->bindShared('appkit.make.module.dashboard', function($app) {
-			$handler = new Handlers\Modules\MakeModuleWidgetHandler($app['modules'], $app['files']);
-
-			return new Console\Modules\MakeModuleDashboardWidgetCommand($handler);
-		});
-
-		$this->app->bindShared('appkit.make.module.sidebar', function($app) {
-			$handler = new Handlers\Modules\MakeModuleWidgetHandler($app['modules'], $app['files']);
-
-			return new Console\Modules\MakeModuleSidebarWidgetCommand($handler);
 		});
 	}
 

@@ -120,6 +120,8 @@
 }
 .side-menu .brand-name-wrapper .navbar-brand {
   display: block;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .side-menu #form-container {
   position: relative;
@@ -158,6 +160,7 @@
 }
 .side-menu .widget {
     text-align: center;
+    padding-top: 20px;
 }
 
 .side-menu .widget .avatar{

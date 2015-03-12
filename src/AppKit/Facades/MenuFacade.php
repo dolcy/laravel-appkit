@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * License: MIT
- * Copyright (c) 2015 Charl Gottschalk
- * Github: https://github.com/Cloud5Ideas
- * @package cloud5ideas/appkit
+ * Copyright (c) 2015 Shea Lewis
+ * Github: https://github.com/caffeinated
+ * @package caffeinated/menus
  */
-class WidgetsFacade extends Facade
+class MenuFacade extends Facade
 {
 	/**
 	 * Get the registered name of the component.
@@ -17,6 +17,6 @@ class WidgetsFacade extends Facade
 	 */
 	protected static function getFacadeAccessor()
 	{
-		return 'widgets';
+		return 'menu';
 	}
 }

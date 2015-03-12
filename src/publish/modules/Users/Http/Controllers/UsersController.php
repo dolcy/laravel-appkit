@@ -76,7 +76,9 @@ class UsersController extends Controller {
 		if (!user_can('create.users', true)) return redirect()->back()->withInput();
 		$input = $request->all();
 		$user = User::create($input);
-		$user->syncRoles($input['roles']);
+		if ($request->has('role')) {
+			$user->syncRoles([$input['role']]);
+		}
 		Mail::send('users::emails.welcome', $input, function($message) use ($input)
 		{
 		    $message->from(Auth::user()->email, Auth::user()->first_name.' '.Auth::user()->last_name);
@@ -137,10 +139,13 @@ class UsersController extends Controller {
 		}, $user)) return redirect()->back()->withInput();
 
 		$input = $request->all();
-		if (!$request->has('superuser')){
-			$input['superuser'] = false;
+		if (!$request->has('is_superuser')){
+			$input['is_superuser'] = false;
 		}
 		$user->update($input);
+		if ($request->has('role')) {
+			$user->syncRoles([$input['role']]);
+		}
 		flash()->success('User details successfully updated.');
 		return redirect()->route('users.edit', $user->id);
 	}

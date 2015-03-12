@@ -8,7 +8,7 @@ use Closure;
  * Github: https://github.com/Cloud5Ideas
  * @package cloud5ideas/appkit
  */
-class CanRegister {
+class Register {
 
 	/**
 	 * Create a new filter instance.
@@ -29,9 +29,9 @@ class CanRegister {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (!config('appkit.can_register'))
+		if (!config('appkit.allow_registration'))
 		{
-			if (config('appkit.registration_404')) {
+			if (config('appkit.register_404')) {
 				abort('404');
 			}
 			return redirect()->route('home');

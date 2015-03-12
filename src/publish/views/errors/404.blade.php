@@ -53,7 +53,7 @@
 			<div class="content">
 				<div class="title">4 Oh! 4</div>
 				<div class="message">The page you are looking for could not be found.</div>
-				<div class="link"><a href="{{ route('home') }}">Return Home</a></div>
+				<div class="link"><a href="{{ url('/') }}">Return Home</a></div>
 			</div>
 		</div>
 	</body>

@@ -41,7 +41,7 @@ class MakeModuleControllerHandler
 	/**
 	 * Constructor method.
 	 *
-	 * @param \C5\AppKit\Modules\Modules      $module
+	 * @param \C5\AppKit\Modules\Modules     $module
 	 * @param \Illuminate\Filesystem\Filesystem $finder
 	 */
 	public function __construct(Modules $module, Filesystem $finder)

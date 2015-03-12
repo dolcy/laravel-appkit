@@ -15,30 +15,6 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
-	| Enable CANjs <http://canjs.com/>
-	|--------------------------------------------------------------------------
-	|
-	| When set to 'true', AppKit will load and setup CANjs.
-	| *** This is currently still in development and won't do anything if set to 'true'.
-	|
-	*/
-
-	'can_js' => false,
-
-	/*
-	|--------------------------------------------------------------------------
-	| Enable Angular <https://angularjs.org/>
-	|--------------------------------------------------------------------------
-	|
-	| When set to 'true', AppKit will load and setup AngularJS.
-	| *** This is currently still in development and won't do anything if set to 'true'.
-	|
-	*/
-
-	'angular_js' => false,
-
-	/*
-	|--------------------------------------------------------------------------
 	| Ajaxify Application
 	|--------------------------------------------------------------------------
 	|
@@ -51,6 +27,21 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Default Application Roles
+	|--------------------------------------------------------------------------
+	|
+	| A list of roles to be seeded into the database.
+	| Example: ['name' => 'Role Name', 'slug' => 'role.name', 'description' => 'Role description']
+	|
+	*/
+
+	'default_roles' => [
+		['name' => 'Administrator', 'slug' => 'app.admin', 'description' => 'Application administrator'],
+		['name' => 'User', 'slug' => 'app.user', 'description' => 'Application user']
+	],
+
+	/*
+	|--------------------------------------------------------------------------
 	| Provide Registration
 	|--------------------------------------------------------------------------
 	|
@@ -58,7 +49,7 @@ return [
 	|
 	*/
 
-	'can_register' => true,
+	'allow_registration' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -71,7 +62,7 @@ return [
 	|
 	*/
 
-	'registration_404' => true,
+	'regiter_404' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -82,7 +73,7 @@ return [
 	|
 	*/
 
-	'default_role' => 'app.user',
+	'register_role' => 'app.user',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -145,17 +136,6 @@ return [
     */
     'js_namespace' => 'appKit',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Enable Sidebar
-    |--------------------------------------------------------------------------
-    |
-    | Set this to 'true' if you want AppKit to render a sidebar.
-    | *** Currently widget rendereing in the sidebar aren't working as expected. 
-    | I recommend keeping this 'false', untill widgets have been fixed.
-    |
-    */
-    'render_sidebar' => false,
 	
 	/*
 	|--------------------------------------------------------------------------

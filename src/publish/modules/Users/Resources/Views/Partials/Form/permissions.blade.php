@@ -1,6 +1,6 @@
 <div class="form-group">
 	<label for="cmbRole">Role</label>
-	{!! Form::select('roles[]', $roles, null, ['class' => 'form-control', 'placeholder' => 'Application Role', 'multiple']) !!}
+	{!! Form::select('role', $roles, null, ['class' => 'form-control', 'placeholder' => 'Application Role']) !!}
 </div>
 @if ($is_superuser)
 	<div class="checkbox">

@@ -23,12 +23,9 @@ class ShellServiceProvider extends ServiceProvider
     public function boot()
     {
     	view()->composers([
-    		'App\Modules\Shell\Composers\NavigationComposer' => 'shell::components.navigation.left',
+    		'App\Modules\Shell\Composers\NavigationComposer' => 'shell::components.navigation.menu',
     		'App\Modules\Shell\Composers\UserComposer' => '*'
     	]);
-  		if (config('appkit.render_sidebar')){
-  			view()->composer('shell::components.sidebar.sidebar', 'App\Modules\Shell\Composers\SidebarWidgetsComposer');
-  		}
     }
 
 	/**

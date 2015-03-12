@@ -1,16 +1,11 @@
-<?php namespace C5\AppKit\Menus;
+<?php
+namespace C5\AppKit\Menus;
 
 use BadMethodCallException;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 
-/**
- * License: MIT
- * Copyright (c) 2015 Shea Lewis
- * Github: https://github.com/caffeinated
- * @package caffeinated/menus
- */
-class MenuBuilder
+class Builder
 {
 	/**
 	 * @var array
@@ -66,19 +61,19 @@ class MenuBuilder
 		$this->config = $config;
 		$this->html   = $html;
 		$this->url    = $url;
-		$this->items  = new MenuCollection;
+		$this->items  = new Collection;
 	}
 
 	/**
 	 * Add an item to the defined menu.
 	 *
 	 * @param  string  $title
-	 * @param  array   $options
-	 * @return \C5\AppKit\Menus\MenuItem
+	 * @param  array|string   $options
+	 * @return \C5\AppKit\Menus\Item
 	 */
 	public function add($title, $options = '')
 	{
-		$item = new MenuItem($this, $this->id(), $title, $options);
+		$item = new Item($this, $this->id(), $title, $options);
 
 		$this->items->push($item);
 
@@ -162,6 +157,43 @@ class MenuBuilder
 		return null;
 	}
 
+	/**
+	 * Sorts the menu based on user's callable.
+	 *
+	 * @param  string|callable  $sortBy
+	 * @param  string           $sortType
+	 * @return \C5\AppKit\Menus\Builder
+	 */
+	public function sortBy($sortBy, $sortType = 'asc')
+	{
+		if (is_callable($sortBy)) {
+			$result = call_user_func($sortBy, $this->items->toArray());
+
+			if (! is_array($result)) {
+				$result = array($result);
+			}
+
+			$this->items = new Collection($result);
+		}
+
+		$this->items->sort(function ($itemA, $itemB) use ($sortBy, $sortType) {
+			$itemA = $itemA->$sortBy;
+			$itemB = $itemB->$sortBy;
+
+			if ($itemA == $itemB) {
+				return 0;
+			}
+
+			if ($sortType == 'asc') {
+				return $itemA > $itemB ? 1 : -1;
+			}
+
+			return $itemA < $itemB ? 1 : -1;
+		});
+
+		return $this;
+	}
+
 	/*
 	|--------------------------------------------------------------------------
 	| Dispatch Methods
@@ -180,9 +212,9 @@ class MenuBuilder
 		if (isset($options['url'])) {
 			return $this->getUrl($options);
 		} elseif (isset($options['route'])) {
-			return $this->getRoute($options['route']);
+			return $this->url->route($options['route']);
 		} elseif (isset($options['action'])) {
-			return $this->getcontrollerAction($options['action']);
+			return $this->url->action($options['action']);
 		}
 
 		return null;
@@ -215,28 +247,6 @@ class MenuBuilder
 		}
 
 		return $this->url->to($prefix.'/'.$url, array(), $secure);
-	}
-
-	/**
-	 * Get the action for a "route" option.
-	 *
-	 * @param  string  $route
-	 * @return string
-	 */
-	protected function getRoute($route)
-	{
-		return $this->url->route($route);
-	}
-
-	/**
-	 * Get the action for a "action" option.
-	 *
-	 * @param  string  $action
-	 * @return string
-	 */
-	protected function getcontrollerAction($action)
-	{
-		return $this->url->action($action);
 	}
 
 	/**
@@ -279,7 +289,7 @@ class MenuBuilder
 	{
 		$items   = '';
 		$itemTag = in_array($type, ['ul', 'ol']) ? 'li' : $type;
-	
+
 		foreach ($this->whereParent($parent) as $item) {
 			$items .= "<{$itemTag}{$this->attributes($item->attributes())}>";
 
@@ -294,14 +304,14 @@ class MenuBuilder
 				$items .= $this->render($type, $item->id);
 				$items .= "</{$type}>";
 			}
-	
+
 			$items .= "</{$itemTag}>";
 
 			if ($item->divider) {
 				$items .= "<{$item_tag}{$this->attributes($item->divider)}></{$item_tag}>";
 			}
 		}
-	
+
 		return $items;
 	}
 
@@ -310,7 +320,7 @@ class MenuBuilder
 	 *
 	 * @param  string  $method
 	 * @param  array   $args
-	 * @return \C5\AppKit\Menus\MenuItem|bool
+	 * @return \C5\AppKit\Menus\Item|bool
 	 */
 	public function __call($method, $args)
 	{
@@ -346,7 +356,7 @@ class MenuBuilder
 	 * Returns menu item by name.
 	 *
 	 * @param  string  $property
-	 * @return \C5\AppKit\Menus\MenuItem
+	 * @return \C5\AppKit\Menus\Item
 	 */
 	public function __get($property)
 	{

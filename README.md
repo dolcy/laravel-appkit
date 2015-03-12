@@ -7,7 +7,7 @@ Cloud5 Idea Studio Laravel 5 AppKit
 
 ###### *Not recommended for use just yet.*
 
-AppKit provides tools and utilities for building modular Laravel 5 applications.
+AppKit is a collection of projects that provides tools and utilities for building modular Laravel 5 applications.
 
 It comes with an authentication, shell and user management module out of the box, allowing you to dive right into building your own modules to expand your application.
 
@@ -64,7 +64,7 @@ This command will run all application and module migrations, seed the database a
 That's it! Now you you can expand your application and build something amazing.
 
 #### Credits
-AppKit uses the following projects:
+AppKit contains the following projects:
 
 ##### From [Laracasts](https://github.com/laracasts)
 

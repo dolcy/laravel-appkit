@@ -35,25 +35,21 @@
                         </a>
                     </div>
                 </li>
-            @foreach ($menu_admin_left->roots() as $item) 
-                <li {!! $item->hasChildren() ? 'class="dropdown panel panel-default"' : null !!} {!! Request::url() == $item->url() ? 'class="active"' : null !!}>
-                    <a {!! $item->hasChildren() ? 'data-toggle="collapse" href="#collapse'.$item->slug.'"' : 'href="'.$item->url().'"' !!}>
-                        <i class="{{ $item->icon }}"></i> {{ $item->title }}
-                    </a>
-                    @if ($item->hasChildren())
-                        <div id="collapse{{$item->slug}}" class="panel-collapse collapse {{ $item->hasChildUrl(Request::url()) ? 'in' : null }}">
-                            <div class="panel-body">
-                                <ul class="nav navbar-nav">
-                                     @foreach ($item->children() as $child)
-                                        <li {!! Request::url() == $child->url() ? 'class="active"' : null !!}>
-                                            <a href="{{ $child->url() }}">{{ $child->title }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
+            @foreach ($menu_admin_left->roots() as $item)
+
+                @if ($item->requiresAccess)
+
+                    @if (user_is($item->access) || user_can($item->access))
+
+                        @include('shell::components.navigation.item', ['item' => $item])
+
                     @endif
-                </li>
+
+                @else
+
+                    @include('shell::components.navigation.item', ['item' => $item])
+
+                @endif
             @endforeach
             </ul>
         </div><!-- /.navbar-collapse -->

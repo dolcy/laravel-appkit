@@ -15,25 +15,13 @@ class RolesTableSeeder extends Seeder {
     {
         DB::table('roles')->delete();
 
-        /**
-         * Application Administrator
-         *
-         **/
-        Role::create([
-        	'name' => 'Application Administrator',
-        	'slug' => 'app.admin',
-        	'description' => 'An application administrator'
-        ]);
-
-        /**
-         * Application User
-         *
-         **/
-        Role::create([
-        	'name' => 'Application User',
-        	'slug' => 'app.user',
-        	'description' => 'A registered application user'
-        ]);
+        foreach (config('appkit.default_roles') as $key) {
+            Role::create([
+                'name' => $key['name'],
+                'slug' => $key['slug'],
+                'description' => $key['description']
+            ]);
+        }
     }
 
 }

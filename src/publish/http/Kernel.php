@@ -27,7 +27,7 @@ class Kernel extends HttpKernel {
 		'auth' => 'App\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
-		'can.register' => 'C5\AppKit\Middleware\CanRegister',
+		'register' => 'C5\AppKit\Middleware\Register',
 		'access' => 'C5\AppKit\Middleware\Permission',
 	];
 

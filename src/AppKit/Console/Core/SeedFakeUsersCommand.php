@@ -1,6 +1,11 @@
 <?php namespace C5\AppKit\Console\Core;
 
+use App\User;
+use Faker\Factory;
 use Illuminate\Console\Command;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * License: MIT
@@ -35,6 +40,38 @@ class SeedFakeUsersCommand extends Command
 	 */
 	public function fire()
 	{
-		$this->call('db:seed', ['--class'=> 'FakeUsersSeeder']);
+		$count = 24;
+
+		if ($this->argument('count')) {
+			$count = $this->argument('count');
+		}
+
+		DB::table('users')->where('id', '>', 1)->delete();
+        $faker = Factory::create();
+
+        for ($i=1; $i < $count; $i++) { 
+            User::create([
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => $faker->email,
+                'password' => bcrypt($faker->password),
+                'is_superuser' => $faker->boolean(),
+                'is_disabled' => $faker->boolean(),
+                'image' => $faker->imageUrl(300, 300),
+                'key' => str_random(21)
+            ]);
+        }
+	}
+
+	/**
+	 * Get the console command arguments.
+	 *
+	 * @return array
+	 */
+	protected function getArguments()
+	{
+		return [
+			['count', InputArgument::OPTIONAL, 'How many users to create.']
+		];
 	}
 }

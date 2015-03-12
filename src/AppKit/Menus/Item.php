@@ -1,15 +1,10 @@
-<?php namespace C5\AppKit\Menus;
+<?php
+namespace C5\AppKit\Menus;
 
-/**
- * License: MIT
- * Copyright (c) 2015 Shea Lewis
- * Github: https://github.com/caffeinated
- * @package caffeinated/menus
- */
-class MenuItem
+class Item
 {
 	/**
-	 * @var \C5\AppKit\Menu\MenuBuilder
+	 * @var \C5\AppKit\Menus\Builder
 	 */
 	protected $builder;
 
@@ -51,10 +46,10 @@ class MenuItem
 	/**
 	 * Constructor.
 	 *
-	 * @param  \C5\AppKit\Menus\MenuBuilder  		$builder
-	 * @param  int                        			$id
-	 * @param  string                     			$title
-	 * @param  array|string               			$options
+	 * @param  \C5\AppKit\Menus\Builder  $builder
+	 * @param  int                        $id
+	 * @param  string                     $title
+	 * @param  array|string               $options
 	 */
 	public function __construct($builder, $id, $title, $options)
 	{
@@ -88,7 +83,7 @@ class MenuItem
 			$path['prefix'] = $this->builder->getLastGroupPrefix();
 		}
 
-		$this->link = isset($path) ? new MenuLink($path) : null;
+		$this->link = isset($path) ? new Link($path) : null;
 
 		if ($this->builder->config('auto_active') === true) {
 			$this->checkActiveStatus();
@@ -100,7 +95,7 @@ class MenuItem
 	 *
 	 * @param  string        $title
 	 * @param  array|string  $options
-	 * @return void
+	 * @return \C5\AppKit\Menus\Item
 	 */
 	public function add($title, $options = '')
 	{
@@ -119,7 +114,7 @@ class MenuItem
 	 * Add attributes to the menu item.
 	 *
 	 * @param  mixed
-	 * @return \C5\AppKit\Menus\MenuItem|string
+	 * @return \C5\AppKit\Menus\Item|string
 	 */
 	public function attributes()
 	{
@@ -157,6 +152,45 @@ class MenuItem
 	}
 
 	/**
+	 * Appends HTML to the item.
+	 *
+	 * @param  string $html
+	 * @return \C5\AppKit\Menus\Item
+	 */
+	public function prepend($html)
+	{
+		$this->title = $html.' '.$this->title;
+
+		return $this;
+	}
+
+	/**
+	 * Appends the specified icon to the item.
+	 *
+	 * @param  string  $icon
+	 * @param  string  $type  Can be either "fontawesome" or "glyphicon"
+	 * @return \C5\AppKit\Menus\Item
+	 */
+	public function icon($icon, $type = 'fontawesome')
+	{
+		switch ($type) {
+			case 'fontawesome':
+				$html = '<i class="fa fa-'.$icon.' fa-fw"></i>&nbsp;';
+				break;
+
+			case 'glyphicon':
+				$html = '<span class="glyphicon glyphicon-'.$icon.'" aria-hidden="true"></span>';
+				break;
+
+			default:
+				$html = '';
+				break;
+		}
+
+		return $this->prepend($html);
+	}
+
+	/**
 	 * Determines if the menu item has children.
 	 *
 	 * @return bool
@@ -169,7 +203,7 @@ class MenuItem
 	/**
 	 * Returns all children underneath the menu item.
 	 *
-	 * @return \C5\AppKit\Menu\MenuCollection
+	 * @return \C5\AppKit\Menus\Collection
 	 */
 	public function children()
 	{
@@ -177,21 +211,28 @@ class MenuItem
 	}
 
 	/**
-	 * Determines if child item url equals the provided url.
-	 * !!This needs to be improved
+	 * Set or get an item's metadata.
 	 *
-	 * @param  string $url
-	 * @return bool
+	 * @param  mixed
+	 * @return string|\C5\AppKit\Menus\Item
 	 */
-	public function hasChildUrl($url)
+	public function data()
 	{
-		$ret = false;
+		$args = func_get_args();
 
-		foreach ($this->children() as $key) {
-			if ($key->url() == $url ) $ret = true;
+		if (isset($args[0]) and is_array($args[0])) {
+			$this->data = array_merge($this->data, array_change_key_case($args[0]));
+
+			return $this;
+		} elseif (isset($args[0]) and isset($args[1])) {
+			$this->data[strtolower($args[0])] = $args[1];
+
+			return $this;
+		} elseif (isset($args[0])) {
+			return isset($this->data[$args[0]]) ? $this->data[$args[0]] : null;
 		}
 
-		return $ret;
+		return $this->data;
 	}
 
 	/**
@@ -206,6 +247,6 @@ class MenuItem
 			return $this->$property;
 		}
 
-		return $this->attributes[$property];
+		return $this->data($property);
 	}
 }

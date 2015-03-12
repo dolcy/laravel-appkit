@@ -1,20 +1,15 @@
-<?php namespace C5\AppKit\Menus;
+<?php
+namespace C5\AppKit\Menus;
 
 use Illuminate\Support\Collection as BaseCollection;
 
-/**
- * License: MIT
- * Copyright (c) 2015 Shea Lewis
- * Github: https://github.com/caffeinated
- * @package caffeinated/menus
- */
-class MenuCollection extends BaseCollection
+class Collection extends BaseCollection
 {
 	/**
 	 * Add attributes to the collection of menu items.
 	 *
 	 * @param  mixed
-	 * @return \C5\AppKit\Menus\MenuCollection
+	 * @return \C5\AppKit\Menus\Collection
 	 */
 	public function attr()
 	{
@@ -35,7 +30,7 @@ class MenuCollection extends BaseCollection
 	 * Add metadata to the collection of items.
 	 *
 	 * @param  mixed
-	 * @return \C5\AppKit\Menus\MenuCollection
+	 * @return \C5\AppKit\Menus\Collection
 	 */
 	public function data()
 	{
@@ -56,7 +51,7 @@ class MenuCollection extends BaseCollection
 	 * Appends text or HTML to the collection of items.
 	 *
 	 * @param  string  $html
-	 * @return \C5\AppKit\Menus\MenuCollection
+	 * @return \C5\AppKit\Menus\Collection
 	 */
 	public function append($html)
 	{
@@ -71,7 +66,7 @@ class MenuCollection extends BaseCollection
 	 * Prepends text or HTML to the collection of items.
 	 *
 	 * @param  string  $html
-	 * @return \C5\AppKit\Menus\MenuCollection
+	 * @return \C5\AppKit\Menus\Collection
 	 */
 	public function prepend($html)
 	{

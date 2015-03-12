@@ -45,6 +45,11 @@ class Role extends Model {
 		return $this->belongsToMany('App\Permission')->withTimestamps();
 	}
 
+	/**
+	 * Get a list of permissions.
+	 *
+	 * @return array
+	 */
 	public function getPermissions()
 	{
 		return $this->permissions->lists('slug');
