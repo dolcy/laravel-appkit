@@ -16,7 +16,7 @@ if ( ! function_exists('admin_url')) {
     /**
      * Generate the admin url.
      *
-     * @return tring
+     * @return string
      */
     function admin_url($url = null)
     {
