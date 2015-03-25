@@ -151,7 +151,7 @@ class AppKitServiceProvider extends ServiceProvider
 	protected function registerServices()
 	{
 
-		$this->app->register('Illuminate\Html\HtmlServiceprovider');
+		$this->app->register('Illuminate\Html\HtmlServiceProvider');
 
 		$this->app->bindShared('modules', function ($app) {
 			return new Modules($app['config'], $app['files']);
